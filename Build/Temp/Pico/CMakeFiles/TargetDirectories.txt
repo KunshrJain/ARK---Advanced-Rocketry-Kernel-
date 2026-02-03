@@ -1,0 +1,2 @@
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/CMakeFiles/edit_cache.dir
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/CMakeFiles/rebuild_cache.dir

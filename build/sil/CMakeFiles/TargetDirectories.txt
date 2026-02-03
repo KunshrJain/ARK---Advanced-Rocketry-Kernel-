@@ -1,0 +1,3 @@
+/home/kunsh/Ignition/ARK/build/sil/CMakeFiles/ARK_Avionics_SIL.dir
+/home/kunsh/Ignition/ARK/build/sil/CMakeFiles/edit_cache.dir
+/home/kunsh/Ignition/ARK/build/sil/CMakeFiles/rebuild_cache.dir
