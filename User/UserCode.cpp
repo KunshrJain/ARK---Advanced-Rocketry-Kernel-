@@ -15,7 +15,6 @@ ARK::GPIO espLed(PIN_LED);
 #endif
 
 void UserSetup() {
-    // Initialize WS2812 on GP16 (Hardware specific for RP2040 Zero)
 #ifdef ARK_ARCH_PICO
     onboardLed = new Modules::WS2812(pio0, PIN_NEOPIXEL, 1);
 #elif defined(ARK_ARCH_ESP32)
