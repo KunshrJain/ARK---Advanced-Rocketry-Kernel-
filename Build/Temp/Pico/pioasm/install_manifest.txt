@@ -1,0 +1,5 @@
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm-install/pioasm/pioasm
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm-install/pioasm/pioasmTargets.cmake
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm-install/pioasm/pioasmTargets-release.cmake
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm-install/pioasm/pioasmConfig.cmake
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm-install/pioasm/pioasmConfigVersion.cmake

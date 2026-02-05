@@ -1,0 +1,7 @@
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm/CMakeFiles/pioasm.dir
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm/CMakeFiles/edit_cache.dir
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm/CMakeFiles/rebuild_cache.dir
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm/CMakeFiles/list_install_components.dir
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm/CMakeFiles/install.dir
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm/CMakeFiles/install/local.dir
+/home/kunsh/Ignition/ARK/Build/Temp/Pico/pioasm/CMakeFiles/install/strip.dir
