@@ -1,3 +1,7 @@
+#include "../../../Config.hpp"
+
+#ifdef ARK_ARCH_PICO
+
 #include "WS2812.hpp"
 #include "ws2812.pio.h"
 
@@ -32,3 +36,5 @@ namespace Modules {
         return ((uint32_t)(r) << 8) | ((uint32_t)(g) << 16) | (uint32_t)(b);
     }
 }
+
+#endif

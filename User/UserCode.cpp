@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-#include "ARK/Ark.hpp" 
-
-void UserSetup() {
-}
-
-void UserLoop() {
-=======
 #include "ARK/Ark.hpp"
 #include "ARK/System/CommunicationProtocols/Gpio/Gpio.hpp"
 #include "ARK/HAL/Time/Time.hpp"
@@ -44,7 +36,6 @@ void UserLoop() {
 #ifdef ARK_ARCH_PICO
         if (onboardLed) {
             if (state) {
-                // Purple for "ARK"
                 onboardLed->SetPixel(0, 50, 0, 50); 
             } else {
                 onboardLed->SetPixel(0, 0, 0, 0);
@@ -57,5 +48,4 @@ void UserLoop() {
         
         lastToggle = currentTime;
     }
->>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
 }

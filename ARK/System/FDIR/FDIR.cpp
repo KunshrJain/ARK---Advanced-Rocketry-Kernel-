@@ -1,4 +1,7 @@
 #include "FDIR.hpp"
+#include "../../../Config.hpp"
+#include "../../System/Power/Power.hpp"
+#include "../../HAL/Console/Console.hpp"
 
 namespace ARK {
     uint32_t FDIR::currentFaults = 0;
@@ -7,18 +10,32 @@ namespace ARK {
     const uint32_t CRITICAL_FAULTS_MASK = Fault::BATT_LOW | Fault::IMU_DETACHED | Fault::KERNEL_OVERRUN;
 
     void FDIR::CheckHealth() {
-<<<<<<< HEAD
-        // TODO: Implement health checks for various sensors and peripherals
-=======
-        // Filhal sab changa si
-        // Sensor check logic yahan aayega jab sensors final honge
+        
+        #if IS_BATTERY
+            float voltage = SystemPower.GetVoltage();
+            if (voltage < 3.5) { // Assuming 1S Lipo/Li-Ion threshold
+                RaiseFault(Fault::BATT_LOW);
+                SystemConsole.Error("[FDIR] Battery Critical: " + std::to_string(voltage) + "V");
+            } else {
+                ClearFault(Fault::BATT_LOW);
+            }
+        #endif
+
+        #if IS_IMU
+            // Placeholder: Check if IMU is communicating
+            // bool imuOk = SystemIMU.TestConnection();
+            // if (!imuOk) RaiseFault(Fault::IMU_DETACHED);
+        #endif
+
         if (currentFaults == 0) {
-            // System sahi chal raha hai
+            // System is healthy
         }
->>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
     }
 
     void FDIR::RaiseFault(Fault f) {
+        if ((currentFaults & f) == 0) { // Only print on new fault
+             SystemConsole.Error("[FDIR] Fault Raised: " + std::to_string(f));
+        }
         currentFaults |= f;
     }
 

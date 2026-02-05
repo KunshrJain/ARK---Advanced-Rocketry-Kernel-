@@ -1,8 +1,29 @@
+# Build artifacts
 build/
+Build/
+Build/
 bin/
 *.o
+*.obj
 *.elf
 *.uf2
 *.bin
-.vscode/
+*.hex
+*.map
+
+# ESP-IDF specific
 sdkconfig
+sdkconfig.old
+
+# IDEs and Tools
+.vscode/
+.idea/
+.project
+.settings/
+.cproject
+*.swp
+*.swo
+
+# Temporary files
+*~
+.DS_Store

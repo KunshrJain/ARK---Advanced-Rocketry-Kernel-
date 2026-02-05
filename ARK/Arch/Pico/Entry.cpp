@@ -1,8 +1,8 @@
 #include "pico/stdlib.h"
-#include "../../Kernel/Loops/SuperiorLoop.hpp"
+#include "ARK/Ark.hpp"
 
 int main() {
     stdio_init_all(); // Pico-specific peripheral init
-    ARK::SuperiorLoop::Start(); 
+    Setup();
     return 0;
 }

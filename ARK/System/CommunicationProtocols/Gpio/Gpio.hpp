@@ -1,14 +1,4 @@
 #pragma once
-<<<<<<< HEAD
-#include <stdint.h>
-
-namespace ARK {
-    namespace GPIO {
-        void Setup(uint8_t pin, bool isOutput);
-        void Write(uint8_t pin, bool value);
-        bool Read(uint8_t pin);
-    }
-=======
 #include <cstdint>
 #include "ARK/HAL/Gpio/Gpio.hpp"
 
@@ -27,5 +17,4 @@ namespace ARK {
         uint8_t _pin;
         HAL::GPIO* _hal = nullptr;
     };
->>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
 }

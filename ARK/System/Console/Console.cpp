@@ -9,19 +9,6 @@
 #endif
 
 namespace ARK {
-<<<<<<< HEAD
-    HAL::Console& SystemConsole =
-#ifdef ARK_ARCH_PICO
-        *new HAL::Pico::Console();
-#elif defined(ARK_ARCH_ESP32)
-        *new HAL::Esp32::Console();
-#elif defined(ARK_ARCH_SIL)
-        *new HAL::SIL::Console();
-#else
-        #error "No architecture selected for Console implementation"
-#endif
-=======
-    
     static HAL::Console* CreateConsole() {
         #ifdef ARK_ARCH_PICO
             return new HAL::Pico::Console();
@@ -36,5 +23,4 @@ namespace ARK {
     }
 
     HAL::Console& SystemConsole = *CreateConsole();
->>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
 }
