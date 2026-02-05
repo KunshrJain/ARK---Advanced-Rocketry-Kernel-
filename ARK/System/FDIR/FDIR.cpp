@@ -7,7 +7,15 @@ namespace ARK {
     const uint32_t CRITICAL_FAULTS_MASK = Fault::BATT_LOW | Fault::IMU_DETACHED | Fault::KERNEL_OVERRUN;
 
     void FDIR::CheckHealth() {
+<<<<<<< HEAD
         // TODO: Implement health checks for various sensors and peripherals
+=======
+        // Filhal sab changa si
+        // Sensor check logic yahan aayega jab sensors final honge
+        if (currentFaults == 0) {
+            // System sahi chal raha hai
+        }
+>>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
     }
 
     void FDIR::RaiseFault(Fault f) {

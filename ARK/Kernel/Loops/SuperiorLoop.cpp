@@ -47,7 +47,13 @@ namespace ARK {
     void SuperiorLoop::Run() {
         const uint64_t kernelGuardUs = KERNEL_GUARD_US; 
         const uint64_t tickPeriod = SystemClock.GetTickPeriodUs();
+<<<<<<< HEAD
         static uint64_t lastM = 0, lastS = 0, lastU = 0;
+=======
+        uint64_t lastM = SystemTime.GetMicros();
+        uint64_t lastS = lastM;
+        uint64_t lastU = lastM;
+>>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
 
         while (true) {
             uint64_t frame_start = SystemTime.GetMicros();

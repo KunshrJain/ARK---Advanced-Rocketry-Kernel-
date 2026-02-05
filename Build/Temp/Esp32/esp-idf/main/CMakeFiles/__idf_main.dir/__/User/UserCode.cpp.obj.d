@@ -1,0 +1,29 @@
+esp-idf/main/CMakeFiles/__idf_main.dir/__/User/UserCode.cpp.obj: \
+ /home/kunsh/Ignition/ARK/User/UserCode.cpp \
+ /home/kunsh/Ignition/ARK/ARK/Ark.hpp \
+ /home/kunsh/Ignition/ARK/ARK/Kernel/StateMachine/States.hpp \
+ /home/kunsh/Ignition/ARK/ARK/CoreTypes.hpp \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/xtensa-esp-elf/include/c++/15.2.0/cstdint \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/xtensa-esp-elf/include/c++/15.2.0/xtensa-esp-elf/esp32/no-rtti/bits/c++config.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/xtensa-esp-elf/include/c++/15.2.0/xtensa-esp-elf/esp32/no-rtti/bits/os_defines.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/xtensa-esp-elf/include/c++/15.2.0/xtensa-esp-elf/esp32/no-rtti/bits/cpu_defines.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/xtensa-esp-elf/include/c++/15.2.0/pstl/pstl_config.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/stdint.h \
+ /home/kunsh/esp/esp-idf/components/esp_libc/platform_include/sys/cdefs.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/sys/cdefs.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/sys/config.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/machine/ieeefp.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/sys/features.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/picolibc.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/15.2.0/include/float.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/machine/_default_types.h \
+ /home/kunsh/Ignition/ARK/Build/Temp/Esp32/config/sdkconfig.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/15.2.0/include/stddef.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/sys/_intsup.h \
+ /home/kunsh/.espressif/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/picolibc/include/sys/_stdint.h \
+ /home/kunsh/Ignition/ARK/ARK/SimpleHelpers.hpp \
+ /home/kunsh/Ignition/ARK/ARK/HAL/Time/Time.hpp \
+ /home/kunsh/Ignition/ARK/ARK/UserAPI/UserCode.hpp \
+ /home/kunsh/Ignition/ARK/ARK/UserAPI/UserTransitions.hpp \
+ /home/kunsh/Ignition/ARK/ARK/System/CommunicationProtocols/Gpio/Gpio.hpp \
+ /home/kunsh/Ignition/ARK/ARK/HAL/Gpio/Gpio.hpp

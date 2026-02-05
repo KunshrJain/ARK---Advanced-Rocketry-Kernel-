@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARK Documentation | Team Ignition</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../public/ark_logo.png">
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="logo-container">
+            <img src="../public/ark_logo.png" alt="ARK Logo" class="logo-img">
+            <div class="logo-text">ARK</div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="#overview" class="nav-link active">Overview</a></li>
+            <li class="nav-item"><a href="#architecture" class="nav-link">Architecture</a></li>
+            <li class="nav-item"><a href="#developer-guide" class="nav-link">Developer Guide</a></li>
+            <li class="nav-item"><a href="#flight-profile" class="nav-link">Flight Profile</a></li>
+            <li class="nav-item"><a href="#fdir" class="nav-link">FDIR & Shadow</a></li>
+            <li class="nav-item"><a href="#hardware" class="nav-link">Hardware</a></li>
+            <li class="nav-item"><a href="#tools" class="nav-link">Python Tools</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <section id="overview">
+                <h1>Advanced Rocketry Kernel</h1>
+                <p class="subtitle">A high-performance, crash-resilient, multi-rate RTOS kernel designed for competitive
+                    model rocketry and avionics.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🚀</span>
+                        <h3>Multi-Architecture</h3>
+                        <p>Runs seamlessly on Raspberry Pi Pico (RP2040) and ESP32 with a unified HAL.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">⚡</span>
+                        <h3>Deterministic</h3>
+                        <p>Time-guarded Superior Loop ensures microsecond precision for flight control.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🛡</span>
+                        <h3>Fault Tolerant</h3>
+                        <p>Integrated FDIR engine and health monitoring for zero-loss missions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="architecture">
+                <h2>Core Architecture</h2>
+                <p>ARK is divided into three specialized micro-kernels managed by the <strong>Superior Loop</strong>:
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kernel</th>
+                            <th>Frequency</th>
+                            <th>Responsibility</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Modules Kernel</strong></td>
+                            <td>200 Hz</td>
+                            <td>Hardware abstraction, Sensor fusion (IMU, Baro, GPS), Communication.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>System Kernel</strong></td>
+                            <td>300 Hz</td>
+                            <td>State Machine, FDIR Engine, Health Monitoring, Shadow State.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>User Kernel</strong></td>
+                            <td>200 Hz</td>
+                            <td>Mission logic, PID control, Deployment algorithms.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="developer-guide">
+                <h2>Developer Guide</h2>
+                <p>Welcome to the ARK API. You primarily work in the <code>User/</code> directory. Here is how to
+                    control your rocket.</p>
+
+                <h3>1. UserTransitions.cpp (The Brain)</h3>
+                <p>This file controls state changes. You check sensor data and trigger transitions.</p>
+
+                <div class="code-block-header">User/UserTransitions.cpp</div>
+                <pre><code>// Example: Launch Detection & Burnout
+void UserTransitions::Update() {
+    
+    // 1. Detect Launch (Acceleration > 2g)
+    if (ARK::IsState(FlightState::ARMED)) {
+        if (ARK::Acceleration() > 19.6) { // 2g in m/s^2
+            ARK::Launch();
+        }
+    }
+
+    // 2. Detect Burnout (Acceleration drops)
+    if (ARK::IsState(FlightState::ASCENT)) {
+        if (ARK::Acceleration() < 0.0) {
+             ARK::Burnout();
+        }
+    }
+
+    // 3. Detect Apogee (Velocity nears 0)
+    if (ARK::IsState(FlightState::COASTING)) {
+        if (ARK::Velocity() < 1.0) {
+            ARK::Apogee();      // Triggers State Change
+            ARK::DeployDrogue(); // Action
+        }
+    }
+}</code></pre>
+
+                <h3>2. Core API Reference</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Function</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>ARK::Altitude()</code></td>
+                            <td>Returns Altitude AGL (meters).</td>
+                        </tr>
+                        <tr>
+                            <td><code>ARK::Acceleration()</code></td>
+                            <td>Returns vertical acceleration (m/s²).</td>
+                        </tr>
+                        <tr>
+                            <td><code>ARK::Velocity()</code></td>
+                            <td>Returns vertical velocity (m/s).</td>
+                        </tr>
+                        <tr>
+                            <td><code>ARK::SetState(STATE)</code></td>
+                            <td>Force a specific state transition.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="flight-profile">
+                <h2>Flight Profile & Use Cases</h2>
+                <p>A typical mission flow in ARK follows this sequence. You can customize the logic in each phase.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>1. Ground</h3>
+                        <p><strong>BOOT &rarr; IDLE &rarr; ARMED</strong></p>
+                        <p>System calibrates sensors. You wait for GPS lock and arm the system via switch or telemetry.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>2. Powered Flight</h3>
+                        <p><strong>LAUNCH &rarr; ASCENT &rarr; BURNOUT</strong></p>
+                        <p>Motor burns. System logs high-speed data (200Hz). FDIR monitors for trajectory instability.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>3. Coast & Apogee</h3>
+                        <p><strong>COASTING &rarr; APOGEE</strong></p>
+                        <p>Rocket coasts to peak altitude. Apogee detection algorithms trigger drogue deployment.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>4. Recovery</h3>
+                        <p><strong>DROGUE &rarr; MAIN &rarr; LANDED</strong></p>
+                        <p>Dual deployment logic. Main chute deploys at configured altitude (e.g., 300m).</p>
+                    </div>
+                </div>
+
+                <h3>Common Use Cases</h3>
+                <ul>
+                    <li><strong>Dual Deployment</strong>: Drogue at Apogee, Main at 300m.</li>
+                    <li><strong>Airbrakes</strong>: Actuate servos during Coasting phase to hit precise altitude target.
+                    </li>
+                    <li><strong>Payloads</strong>: Trigger scientific payloads upon reaching microgravity (Apogee).</li>
+                </ul>
+            </section>
+
+            <section id="fdir">
+                <h2>FDIR & Shadow State</h2>
+                <div class="feature-card" style="margin-bottom: 20px;">
+                    <h3>8-Bit FDIR Engine</h3>
+                    <p>Fault Detection, Isolation, and Recovery engine monitors system health bit-by-bit:</p>
+                    <ul>
+                        <li><code>0x01</code>: I2C Bus Loss</li>
+                        <li><code>0x02</code>: SPI Bus Loss</li>
+                        <li><code>0x04</code>: Kernel Overrun</li>
+                        <li><code>0x08</code>: Low Voltage</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Shadow State Mirroring</h3>
+                    <p>A "Black Box" mechanism that persists flight state to internal Flash. Ensures that if the rocket
+                        reboots mid-air, it resumes exactly where it left off, rather than resetting to "Idle" on the
+                        pad.</p>
+                </div>
+            </section>
+
+            <section id="hardware">
+                <h2>Hardware Support</h2>
+                <p>ARK features a Hardware Abstraction Layer (HAL) for rapid portability.</p>
+                <ul>
+                    <li><strong>Raspberry Pi Pico (RP2040)</strong>: ARM Cortex-M0+ via Pico SDK.</li>
+                    <li><strong>ESP32</strong>: Xtensa LX6 via ESP-IDF.</li>
+                </ul>
+            </section>
+
+            <section id="states">
+                <h2>States Reference</h2>
+                <p>ARK uses a deterministic 20-state machine. Here are the key states.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>State Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td><strong>BOOT</strong></td>
+                            <td>System startup and self-check.</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>INITIALIZING</strong></td>
+                            <td>Driver initialization (IMU, Barometer, SD Card).</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>CALIBRATION</strong></td>
+                            <td>Sensor bias calculation (Do not move rocket).</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>IDLE</strong></td>
+                            <td>Waiting on launchpad. Ready for Arming.</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>ARMED</strong></td>
+                            <td>Pyrotechnics live. Waiting for launch acceleration (>2g).</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><strong>LAUNCH</strong></td>
+                            <td>Liftoff detected. Transitions immediately to ASCENT.</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><strong>ASCENT</strong></td>
+                            <td>Powered flight phase. Motor is burning.</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><strong>BURNOUT</strong></td>
+                            <td>Motor burnout detected (deceleration).</td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td><strong>COASTING</strong></td>
+                            <td>Unpowered coast to apogee.</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td><strong>APOGEE</strong></td>
+                            <td>Max altitude reached. Deploy Drogue.</td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td><strong>DROGUE</strong></td>
+                            <td>Drogue parachute descent.</td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td><strong>MAIN_DEPLOYMENT</strong></td>
+                            <td>Main parachute deployment (e.g. at 300m).</td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td><strong>LANDED</strong></td>
+                            <td>Touchdown detected. Beepers on.</td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td><strong>FAILSAFE</strong></td>
+                            <td>Critical failure mode. Abort mission.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="tools">
+                <h2>Python Tools Suite</h2>
+                <p>We provide a CLI toolchain to manage the project.</p>
+
+                <h3>1. Build</h3>
+                <pre><code>python3 Tools/Build.py pico
+python3 Tools/Build.py esp32
+python3 Tools/Build.py clean</code></pre>
+
+                <h3>2. Upload</h3>
+                <pre><code># Auto-detects drive/port
+python3 Tools/Upload.py pico
+python3 Tools/Upload.py esp32</code></pre>
+
+                <h3>3. Configure</h3>
+                <pre><code>python3 Tools/GenerateConfig.py</code></pre>
+            </section>
+
+            <footer>
+                <p>&copy; 2026 Team Ignition Software Department. Distributed under MIT License.</p>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

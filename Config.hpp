@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 /* System Configuration */
 
 #define IS_BATTERY false;
@@ -14,6 +15,17 @@
 #define SYSTEM_KERNEL_FREQUENCY 300    
 #define USER_KERNEL_FREQUENCY 200      
 #define KERNEL_GUARD_US 500
+=======
+#define IS_BATTERY false;
+#define IS_FILTERS false;
+#define MCU_FREQUENCY_MHZ 133         
+#define SYSTEM_FREQUENCY_HZ 200
+
+#define MODULES_KERNEL_FREQUENCY 100   
+#define SYSTEM_KERNEL_FREQUENCY 150    
+#define USER_KERNEL_FREQUENCY 100      
+#define KERNEL_GUARD_US 1000
+>>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
 
 #define USE_STATE_BOOT true
 #define USE_STATE_INITIALIZING true
@@ -36,10 +48,13 @@
 #define USE_STATE_LANDED true
 #define USE_STATE_FAILSAFE true
 
+<<<<<<< HEAD
 /**/
 
 /* Modules Configuration */
 
+=======
+>>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
 #define IS_ACTUATORS false
 #define IS_ALTIMETER false
 #define IS_ANALOG false
@@ -53,6 +68,7 @@
 #define IS_RECOVERY_EJECTION false
 #define IS_STORAGE false
 
+<<<<<<< HEAD
 /**/
 
 /* User Configuration */
@@ -69,8 +85,13 @@
 
 /* Simulation Configuration */
 
+=======
+>>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
 #define SIMULATION_MODE_ACTIVE false
 #define SIL_MODE_ACTIVE false
 #define HIL_MODE_ACTIVE false
 
+<<<<<<< HEAD
 /**/
+=======
+>>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)

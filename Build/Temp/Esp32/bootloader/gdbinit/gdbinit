@@ -1,0 +1,2 @@
+source /home/kunsh/Ignition/ARK/Build/Temp/Esp32/bootloader/gdbinit/symbols
+source /home/kunsh/Ignition/ARK/Build/Temp/Esp32/bootloader/gdbinit/connect

@@ -2,6 +2,10 @@
 #include "Config.hpp"
 #include "esp_pm.h"
 #include "esp_private/esp_clk.h"
+<<<<<<< HEAD
+=======
+#include "soc/rtc.h"
+>>>>>>> 452b8f4 (Re-initialized repository with clean .gitignore and synced structure)
 
 namespace ARK {
     namespace HAL {

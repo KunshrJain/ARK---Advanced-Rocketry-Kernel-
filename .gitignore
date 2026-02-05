@@ -1,0 +1,8 @@
+build/
+bin/
+*.o
+*.elf
+*.uf2
+*.bin
+.vscode/
+sdkconfig
